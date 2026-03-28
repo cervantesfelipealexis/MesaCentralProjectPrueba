@@ -247,6 +247,47 @@ h1, h2, h3, .section-title {
     padding: 20px;
 }
 
+.team-banner {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto 50px auto;
+    height: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.team-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.6); 
+}
+
+.banner-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px;
+    text-align: left;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    box-sizing: border-box;
+}
+
+.banner-caption h3 {
+    color: #ffffff;
+    font-size: 3rem;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.banner-caption p {
+    color: #e0e0e0;
+    font-size: 1.2rem;
+    margin: 5px 0 0 0;
+}
+
 .team-section {
     padding: 50px 20px;
     text-align: center;
