@@ -28,7 +28,7 @@ body {
     margin-right: 0; 
 }
 .logoMesa {
-    height: 130px;
+    height: 100px;
     width: auto;  
     transition: height 0.3s ease; 
 }
