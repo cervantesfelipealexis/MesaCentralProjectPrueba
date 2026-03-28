@@ -274,14 +274,23 @@ h1, h2, h3, .section-title {
     color: #D4AF37;
 }
 
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px;
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 10px;
+}
+
 .index-feature-banner {
     position: relative;
-    max-width: 1100px; 
+    width: 100%; 
     margin: 40px auto;
     height: 350px;     
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     background-color: #000; 
 }
 
@@ -318,7 +327,7 @@ h1, h2, h3, .section-title {
 }
 
 .footer {
-    background-color: #333;
+    background-color: ##003b70;
     color: white;
     text-align: center;
     padding: 20px;
@@ -698,4 +707,80 @@ h1, h2, h3, .section-title {
 .btn-download-xlxs:hover {
     background-color: #155d28;
     transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    
+    .brand-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .title-container {
+        border-left: none;
+        border-top: 2px solid #D4AF37;
+        padding-left: 0;
+        padding-top: 15px;
+    }
+
+    .title-container h1 {
+        font-size: 1.3rem;
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar a {
+        padding: 12px 20px;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .carrusel-slide img {
+        height: 300px;
+    }
+
+    .carrusel-caption {
+        padding: 30px 20px;
+    }
+
+    .carrusel-caption h2 {
+        font-size: 1.6rem;
+    }
+
+    .team-banner {
+        height: auto;
+    }
+
+    .banner-caption h3 {
+        font-size: 2rem;
+    }
+
+    .feature-grid, 
+    .team-grid, 
+    .activities-grid {
+        grid-template-columns: 1fr;
+        padding: 0 15px;
+    }
+
+    .index-feature-banner {
+        height: 280px;
+        margin: 20px auto;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .quienes-somos {
+        padding: 40px 15px;
+    }
+
+    .data-table-wrapper {
+        overflow-x: auto;
+    }
 }
