@@ -1,57 +1,60 @@
-//_________________________________________________________-
-//_______NO TOCAR; CARRUSEL FUNCIONANDO____________________-
-//_________________________________________________________-
+// ===============================================
+// 1. LÓGICA DEL CARRUSEL (Sólo para Index)
+// ===============================================
 let slideIndex = 1;
-showSlides(slideIndex);
 
+// Verificamos si existen slides antes de arrancar
+const slidesExist = document.getElementsByClassName("carrusel-slide").length > 0;
+if (slidesExist) {
+    showSlides(slideIndex);
+}
 
 function plusSlides(n) {
-  showSlides(slideIndex += n);
+    showSlides(slideIndex += n);
 }
 function currentSlide(n) {
-  showSlides(slideIndex = n);
+    showSlides(slideIndex = n);
 }
 
 function showSlides(n) {
-  let i;
-  let slides = document.getElementsByClassName("carrusel-slide");
-  let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
+    let i;
+    let slides = document.getElementsByClassName("carrusel-slide");
+    let dots = document.getElementsByClassName("dot");
+    
+    // Si la función se llama en una página sin carrusel, salimos silenciosamente
+    if (slides.length === 0) return;
+
+    if (n > slides.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = slides.length}
+    
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+
+    // El check definitivo antes de aplicar estilos
+    if (slides[slideIndex - 1]) {
+        slides[slideIndex - 1].style.display = "block";
+    }
+    if (dots[slideIndex - 1]) {
+        dots[slideIndex - 1].className += " active";
+    }
 }
 
-//__________________________________________________________-
-//_______tocar si la paginación no sirve____________________-
-//__________________________________________________________-
 // ===============================================
 // 2. LÓGICA DE PAGINACIÓN DE BASE DE DATOS (CSV)
 // ===============================================
-
-let allData = []; // Aquí se almacenarán todos los registros del CSV
+let allData = []; 
 const rowsPerPage = 20;
 let currentPage = 1;
 
-// Referencias a los elementos del DOM
-let tableBody;
-let prevButton;
-let nextButton;
-let pageSpan;
+let tableBody, prevButton, nextButton, pageSpan;
 let dynamicDataPath = null; 
 
-// -----------------------------------------------
-//  FUNCIONES CLAVE QUE FALTAN O DEBEN ESTAR INCLUIDAS
-// -----------------------------------------------
-
-// FUNCIÓN PARA MOSTRAR LOS DATOS DE LA PÁGINA ACTUAL
 function displayTable(data, wrapper) {
+    if (!wrapper) return;
     wrapper.innerHTML = ''; 
 
     const start = (currentPage - 1) * rowsPerPage;
@@ -60,39 +63,27 @@ function displayTable(data, wrapper) {
 
     paginatedData.forEach(row => {
         const tr = document.createElement('tr');
-        
         tr.innerHTML = `
-            <td>${row[0]}</td>
-            <td>${row[1]}</td>
-            <td>${row[2]}</td>
-            <td>${row[3]}</td>
-            <td>${row[4]}</td>
-            <td>${row[5]}</td>
+            <td>${row[0] || ''}</td>
+            <td>${row[1] || ''}</td>
+            <td>${row[2] || ''}</td>
+            <td>${row[3] || ''}</td>
+            <td>${row[4] || ''}</td>
+            <td>${row[5] || ''}</td>
         `;
         wrapper.appendChild(tr);
     });
 }
 
-// FUNCIÓN PARA ACTUALIZAR EL ESTADO DE LA PAGINACIÓN Y BOTONES
 function setupPagination() {
-    const pageCount = Math.ceil(allData.length / rowsPerPage);
+    if (!pageSpan || !prevButton || !nextButton) return;
+    const pageCount = Math.ceil(allData.length / rowsPerPage) || 1;
     
     pageSpan.textContent = `Página ${currentPage} de ${pageCount}`;
-
     prevButton.disabled = currentPage === 1;
     nextButton.disabled = currentPage === pageCount || allData.length === 0;
-    
-    if (allData.length === 0) {
-        prevButton.disabled = true;
-        nextButton.disabled = true;
-        pageSpan.textContent = 'No hay datos disponibles.';
-        if (tableBody) {
-             tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center;">Error o datos vacíos.</td></tr>';
-        }
-    }
 }
 
-// FUNCIÓN PARA IR A LA PÁGINA SIGUIENTE
 function goToNextPage() {
     const pageCount = Math.ceil(allData.length / rowsPerPage);
     if (currentPage < pageCount) {
@@ -101,7 +92,7 @@ function goToNextPage() {
         setupPagination();
     }
 }
-// FUNCIÓN PARA IR A LA PÁGINA ANTERIOR
+
 function goToPrevPage() {
     if (currentPage > 1) {
         currentPage--;
@@ -109,69 +100,55 @@ function goToPrevPage() {
         setupPagination();
     }
 }
-// -----------------------------------------------
-//  FIN DE FUNCIONES CLAVE
-// -----------------------------------------------
 
-// Función principal de Carga de Datos (Tu código actual - sin cambios)
 function loadData() {
-    if (!dynamicDataPath) {
-        console.error("Ruta del archivo CSV no encontrada en el HTML.");
-        setupPagination(); 
-        return; 
-    }
+    if (!dynamicDataPath) return;
 
     Papa.parse(dynamicDataPath, {
         download: true, 
         header: false, 
         skipEmptyLines: true,
         complete: function(results) {
-            results.data.shift(); 
-            
+            results.data.shift(); // Quitar encabezado
             allData = results.data;
             displayTable(allData, tableBody);
             setupPagination();
-            
-            console.log(`Datos cargados desde: ${dynamicDataPath}. Total: ${allData.length}`);
         },
         error: function(error) {
-            console.error(`Error al cargar el archivo ${dynamicDataPath}:`, error);
-            allData = []; 
+            console.error("Error CSV:", error);
             setupPagination();
         }
     });
 }
 
-// Inicialización Global (Tu código actual - sin cambios)
+// ===============================================
+// 3. INICIALIZACIÓN (DOMContentLoaded)
+// ===============================================
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Obtener la referencia al contenedor principal y extraer la ruta
+    // A. Lógica de Bases de Datos
     const detailsSection = document.querySelector('.field-details-section');
     if (detailsSection) {
         dynamicDataPath = detailsSection.getAttribute('data-csv-path');
     }
     
-    //  Inicializar referencias DOM
     tableBody = document.getElementById('data-table-body');
     prevButton = document.getElementById('prev-btn');
     nextButton = document.getElementById('next-btn');
     pageSpan = document.getElementById('page-status');
 
-    // 3. Inicializar eventos (Carrusel y Paginación)
     if (tableBody && prevButton && nextButton && pageSpan) {
         prevButton.addEventListener('click', goToPrevPage);
         nextButton.addEventListener('click', goToNextPage);
-        
-        loadData(); // Llama a la carga con la ruta dinámica
+        loadData();
     }
-});
 
-document.addEventListener("DOMContentLoaded", () => {
+    // B. Lógica de Feed de Enseñanza (JSON)
     const feedContainer = document.getElementById("teaching-feed");
-
     if (feedContainer) {
         fetch("enseñanza.json")
             .then(response => response.json())
             .then(data => {
+                feedContainer.innerHTML = ''; 
                 data.forEach(item => {
                     const card = `
                         <div class="activity-card">
@@ -187,6 +164,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     feedContainer.innerHTML += card;
                 });
             })
-            .catch(error => console.error("Error cargando el feed:", error));
+            .catch(error => console.error("Error JSON:", error));
     }
 });
