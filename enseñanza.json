@@ -2,28 +2,37 @@
   {
     "id": 1,
     "categoria": "Congreso",
-    "titulo": "Convención Geológica Nacional",
-    "fecha": "Marzo 2026",
-    "descripcion": "Presentación de póster sobre la geocronología de los diques en el Distrito Fresnillo.",
+    "titulo": "Sitio del congreso",
+    "fecha": "Fecha del congreso",
+    "descripcion": "Descipción del congreso",
     "imagen": "assets/images/carrusel/images-11.jpg",
     "link": "#"
   },
   {
     "id": 2,
     "categoria": "Curso",
-    "titulo": "Taller de Inclusiones Fluidas",
-    "fecha": "Febrero 2026",
-    "descripcion": "Capacitación intensiva para estudiantes de ingeniería en el uso de la platina Linkam.",
+    "titulo": "Nombre del taller",
+    "fecha": "Fecha del curso",
+    "descripcion": "Descripción del taller/curso",
     "imagen": "assets/images/carrusel/images-4.JPG",
     "link": "Research.html"
   },
   {
-    "id": 3,
-    "categoria": "Campo",
-    "titulo": "Brigada Durango-Sinaloa",
-    "fecha": "Enero 2026",
-    "descripcion": "Prácticas profesionales y recolección de muestras en el margen norte de la Mesa Central.",
-    "imagen": "assets/images/carrusel/images-3.JPG",
-    "link": "field-camps.html"
+    "id": 1,
+    "categoria": "Congreso",
+    "titulo": "Sitio del congreso",
+    "fecha": "Fecha del congreso",
+    "descripcion": "Descipción del congreso",
+    "imagen": "assets/images/carrusel/images-11.jpg",
+    "link": "#"
+  },
+  {
+    "id": 2,
+    "categoria": "Curso",
+    "titulo": "Nombre del taller",
+    "fecha": "Fecha del curso",
+    "descripcion": "Descripción del taller/curso",
+    "imagen": "assets/images/carrusel/images-4.JPG",
+    "link": "Research.html"
   }
 ]
