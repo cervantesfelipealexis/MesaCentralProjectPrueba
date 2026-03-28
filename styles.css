@@ -456,6 +456,13 @@ h1, h2, h3, .section-title {
     text-align: left; 
 }
 
+.activity-card h3 {
+    color: #003b70;
+    border-bottom: 2px solid #D4AF37;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
 .activity-card:hover {
     transform: translateY(-5px); 
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
@@ -567,6 +574,10 @@ h1, h2, h3, .section-title {
     text-align: left;
     margin: 0 auto 40px auto;
     max-width: 900px;
+}
+
+.field-description strong {
+    color: #003b70; 
 }
 
 .field-description h2 {
