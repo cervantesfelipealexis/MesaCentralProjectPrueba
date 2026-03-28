@@ -285,8 +285,7 @@ h1, h2, h3, .section-title {
 
 .index-feature-banner {
     position: relative;
-    width: 100%; 
-    margin: 40px auto;
+    width: 100%;
     height: 350px;     
     border-radius: 12px;
     overflow: hidden;
@@ -331,6 +330,7 @@ h1, h2, h3, .section-title {
     color: white;
     text-align: center;
     padding: 20px;
+    border-top: 3px solid #D4AF37;
 }
 
 .team-banner {
