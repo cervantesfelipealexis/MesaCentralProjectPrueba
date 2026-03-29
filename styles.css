@@ -352,7 +352,7 @@ h1, h2, h3, .section-title {
     width: 100%;
     height: auto; 
     display: block; 
-    filter: brightness(0.6);
+    filter: brightness(1.0);
 }
 
 .banner-caption {
