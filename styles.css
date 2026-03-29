@@ -122,7 +122,7 @@ h1, h2, h3, .section-title {
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 60px 50px; 
+    padding: 60px 50px 20px 50px;
     box-sizing: border-box;
     text-align: left;
     background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%);
@@ -194,7 +194,7 @@ h1, h2, h3, .section-title {
 
 .dot-container {
     position: absolute;
-    bottom: 20px;
+    bottom: 5px;
     width: 100%;
     text-align: center;
     z-index: 20;
