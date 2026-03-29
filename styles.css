@@ -93,15 +93,17 @@ h1, h2, h3, .section-title {
 .carrusel-section {
     padding: 30px 0;
     background-color: #f9f9f9;
+    overflow: hidden;
 }
 
 .carrusel-container {
-    max-width: 1100px;
+    max-width: 1100px; 
     position: relative; 
-    margin: auto;
+    margin: 0 auto; 
     border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    overflow: hidden; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+    border: 1px solid rgba(0,0,0,0.05); 
 }
 
 .carrusel-slide {
@@ -193,13 +195,14 @@ h1, h2, h3, .section-title {
 
 .dot-container {
     position: absolute;
-    bottom: 20px; 
-    right: 40px;
-    width: auto;  
+    bottom: 25px; 
+    right: 30px; 
+    width: auto; 
     text-align: right;
-    z-index: 20;  
+    z-index: 50; 
     margin: 0;
     padding: 0;
+    left: auto; 
 }
 
 .dot {
